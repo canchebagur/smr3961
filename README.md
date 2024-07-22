@@ -6,7 +6,7 @@ This repository contains the material used for the hands-on Arduino sessions of 
 
 1. The Workshop Board: The Nicla Vision
 2. Arduino Ecosystem Installation
-3. Onboard sensors test 
+3. Onboard Sensors Test 
 
 ## The Workshop Board: The Nicla Vision
 
@@ -43,4 +43,8 @@ To make sure the Nicla Vision is working correctly, we need to test the followin
 - **Microphone**: The Arduino IDE includes a simple example of visualizing raw data from the onboard microphone. To test it, navigate to **File > Examples > PDM > PDMSerialPlotter**. Upload the example code to the Nicla Vision and open the Serial Plotter to see the sound wave output.
 
 ![Microphone test sketch](/assets/microphone_test.gif)
+
+- **IMU**: To use the onboard IMU of the Nicla Vision with the Arduino IDE, we must first install the `Arduino_LSM6DSOX` library, which can be found in the Arduino IDE Library Manager. To install the library, select the Library Manage from the left side menu, and then search for `LSM6DSOX`. **Install the library from Arduino**. Go to **Examples > Arduino_LSM6DSOX > SimpleAccelerometer** with the library installed and run the accelerometer test. Upload the example code to the Nicla Vision and open the Serial Plotter to see the accelerometer output.
+
+![Accelerometer test sketch](/assets/accelerometer_test.gif)
 
