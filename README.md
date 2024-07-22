@@ -1,4 +1,4 @@
-# smr3961
+# SMR3961 Hands-On with the Nicla Vision
 
 This repository contains the material used for the hands-on Arduino sessions of [SMR3961 workshop](https://indico.ictp.it/event/10499). This material lets you connect an [Arduino® Nicla Vision board](https://store.arduino.cc/products/nicla-vision) to the Arduino IDE and Edge Impulse®. [You can find all the workshop materials here](https://tinyml.seas.harvard.edu/SustainableDev-24/).
 
@@ -6,7 +6,8 @@ This repository contains the material used for the hands-on Arduino sessions of 
 
 1. The Workshop Board: The Nicla Vision
 2. Arduino Ecosystem Installation
-3. Onboard Sensors Test 
+3. Onboard Sensors Test
+4. Edge Impulse Environment Configuration
 
 ## The Workshop Board: The Nicla Vision
 
@@ -131,3 +132,20 @@ while(True):
 Select the **Start** icon (green triangle) in the bottom left of the OpenMV IDE; the camera feed will display in the OpenMV IDE's frame buffer (notice that the dynamic color balance is also shown). 
 
 ![OpenMV IDE](/assets/OpenMV_IDE_03.png)
+
+## Edge Impulse Environment Configuration
+
+Let's set up the Edge Impulse® environment on your computer. The first step for Edge Impulse configuration is to install its CLI. [Follow these instructions to install the Edge Impulse CLI](https://docs.edgeimpulse.com/docs/tools/edge-impulse-cli/cli-installation). 
+
+***Windows users: Install [Visual Studio Community](https://visualstudio.microsoft.com/downloads/) and [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022) before you install Edge Impulse CLI.***
+
+After correctly installing Edge Impulse CLI, [install the latest Arduino CLI version](https://arduino.github.io/arduino-cli/0.35/installation/). For guidance in Windows, [watch the steps shown in this video](https://www.youtube.com/watch?v=1jMWsFER-Bc).
+
+Now, let's test the Edge Impulse CLI and the Arduino CLI installation:
+
+- Download the [latest Edge Impulse firmware for the Nicla Vision](https://cdn.edgeimpulse.com/firmware/arduino-nicla-vision.zip) and unzip it.
+- Open the .zip file on your computer and select the uploader corresponding to your operating system (Linux, Mac, or Windows).
+- Put the Nicla Vision on `BOOT` mode by pressing the reset button twice.
+- Execute the specific uploader for your operating system to upload the `arduino-nicla-vision.bin` file to your board.
+
+Go to your project on Edge Impulse Studio. On the `Data Acquisition` tab, select WebUSB (1). A window will pop up; choose the option that shows that the Nicla is paired (2) and press `Connect` (3).6r
