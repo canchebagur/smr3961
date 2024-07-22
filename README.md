@@ -44,7 +44,54 @@ To make sure the Nicla Vision is working correctly, we need to test the followin
 
 ![Microphone test sketch](/assets/microphone_test.gif)
 
-- **IMU**: To use the onboard IMU of the Nicla Vision with the Arduino IDE, we must first install the `Arduino_LSM6DSOX` library, which can be found in the Arduino IDE Library Manager. To install the library, select the Library Manage from the left side menu, and then search for `LSM6DSOX`. **Install the library from Arduino**. Go to **Examples > Arduino_LSM6DSOX > SimpleAccelerometer** with the library installed and run the accelerometer test. Upload the example code to the Nicla Vision and open the Serial Plotter to see the accelerometer output.
+- **IMU**: To use the onboard IMU of the Nicla Vision with the Arduino IDE, we must first install the `Arduino_LSM6DSOX` library, which can be found in the Arduino IDE Library Manager. To install the library, select the Library Manage from the left side menu, and then search for `LSM6DSOX`. **Install the library from Arduino**. Then, go to **Examples > Arduino_LSM6DSOX > SimpleAccelerometer** with the library installed and run the accelerometer test. Upload the example code to the Nicla Vision and open the Serial Plotter to see the accelerometer output.
 
 ![Accelerometer test sketch](/assets/accelerometer_test.gif)
 
+- **Distance sensor**: To use the onboard distance sensor of the Nicla Vision with the Arduino IDE, we must first install the `VL53L1X` library from Pololu, which can be found in the Arduino IDE Library Manager. To install the library, select the Library Manage from the left side menu, and then search for `VL53L1X`. **Install the library from Pololu**. Then, compile and upload the example code below to your Nicla Vision.
+
+```arduino
+#include "VL53L1X.h"
+VL53L1X proximity;
+
+bool blinkState = false;
+int reading = 0;
+int timeStart = 0;
+int blinkTime = 2000;
+
+void setup() {
+  Serial.begin(115200);
+  Wire1.begin();
+  Wire1.setClock(400000); // use 400 kHz I2C
+  proximity.setBus(&Wire1);
+
+
+  pinMode(LEDB, OUTPUT);
+  digitalWrite(LEDB, blinkState);
+
+  if (!proximity.init()) {
+    Serial.println("Failed to detect and initialize sensor!");
+    while (1);
+  }
+
+  proximity.setDistanceMode(VL53L1X::Long);
+  proximity.setMeasurementTimingBudget(50000);
+  proximity.startContinuous(50);
+}
+
+void loop() {
+  reading = proximity.read();
+  Serial.print(reading);
+  Serial.println(" mm");
+
+  if (millis() - timeStart >= reading) {
+    digitalWrite(LEDB, blinkState);
+    timeStart = millis();
+
+    blinkState = !blinkState;
+  }
+}
+```
+The distance measured by the distance sensor will be printed on the Arduino IDE's Serial Monitor, and the built-in LED will blink proportionally to that distance.
+
+![Distance sensor test sketch](/assets/distance_test.gif)
